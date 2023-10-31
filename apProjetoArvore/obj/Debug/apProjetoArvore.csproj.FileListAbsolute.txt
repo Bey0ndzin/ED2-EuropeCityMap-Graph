@@ -1,0 +1,11 @@
+C:\Users\u22147\Documents\GitHub\Projeto-I-ED2\apProjetoArvore\obj\Debug\apProjetoArvore.csproj.AssemblyReference.cache
+C:\Users\u22147\Documents\GitHub\Projeto-I-ED2\apProjetoArvore\obj\Debug\apProjetoArvore.csproj.SuggestedBindingRedirects.cache
+C:\Users\u22147\Documents\GitHub\Projeto-I-ED2\apProjetoArvore\obj\Debug\apProjetoArvore.Form1.resources
+C:\Users\u22147\Documents\GitHub\Projeto-I-ED2\apProjetoArvore\obj\Debug\apProjetoArvore.Properties.Resources.resources
+C:\Users\u22147\Documents\GitHub\Projeto-I-ED2\apProjetoArvore\obj\Debug\apProjetoArvore.csproj.GenerateResource.cache
+C:\Users\u22147\Documents\GitHub\Projeto-I-ED2\apProjetoArvore\obj\Debug\apProjetoArvore.csproj.CoreCompileInputs.cache
+C:\Users\u22147\Documents\GitHub\Projeto-I-ED2\apProjetoArvore\bin\Debug\apProjetoArvore.exe.config
+C:\Users\u22147\Documents\GitHub\Projeto-I-ED2\apProjetoArvore\bin\Debug\apProjetoArvore.exe
+C:\Users\u22147\Documents\GitHub\Projeto-I-ED2\apProjetoArvore\bin\Debug\apProjetoArvore.pdb
+C:\Users\u22147\Documents\GitHub\Projeto-I-ED2\apProjetoArvore\obj\Debug\apProjetoArvore.exe
+C:\Users\u22147\Documents\GitHub\Projeto-I-ED2\apProjetoArvore\obj\Debug\apProjetoArvore.pdb
