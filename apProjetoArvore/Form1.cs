@@ -39,7 +39,7 @@ namespace apProjetoArvore
             {
                 cidades.LerArquivoDeRegistros(dlgAbrir.FileName);
                 lsbCidades.Items.Clear();
-                lsbCidades.Items.Add("Nome                X        Y");
+                lsbCidades.Items.Add("Nome            X     Y");
                 cidades.ExibirDados(lsbCidades, cidades.Raiz);
 
                 cidades.PosicionarNaRaiz();
@@ -127,7 +127,7 @@ namespace apProjetoArvore
                 cidades.SituacaoAtual = Situacao.navegando;
 
                 lsbCidades.Items.Clear();
-                lsbCidades.Items.Add("Nome                X        Y");
+                lsbCidades.Items.Add("Nome            X     Y");
                 cidades.ExibirDados(lsbCidades, cidades.Raiz);
 
                 VerificarBotoes();
@@ -164,7 +164,7 @@ namespace apProjetoArvore
                 txtCoordY.Text = cid.Y.ToString();
 
                 lsbCidades.Items.Clear();
-                lsbCidades.Items.Add("Nome                X        Y");
+                lsbCidades.Items.Add("Nome            X     Y");
                 cidades.ExibirDados(lsbCidades, cidades.Raiz);
 
                 pbMapa.Refresh();
@@ -200,18 +200,11 @@ namespace apProjetoArvore
 
         private void pbMapa_Paint(object sender, PaintEventArgs e)
         {
-            if(button1.Text == "Árvore")
-            {
                 Graphics g = e.Graphics;
                 int esp = pbMapa.Bounds.Width / 150;
                 Pen pen = new Pen(Color.Black, esp);
                 cidades.PosicionarNaRaiz();
                 cidades.DesenharMapa(true, pbMapa.Bounds.Width, pbMapa.Bounds.Height, pen, cidades.Raiz, esp, g);
-            }
-            else
-            {
-                cidades.DesenharArvore(pbMapa.Width/2, 0, e.Graphics);
-            }
         }
 
         private void btnSair_Click(object sender, EventArgs e)
@@ -231,7 +224,7 @@ namespace apProjetoArvore
                     txtCoordY.Text = cid.Y.ToString();
 
                     lsbCidades.Items.Clear();
-                    lsbCidades.Items.Add("Nome                X        Y");
+                    lsbCidades.Items.Add("Nome            X     Y");
                     cidades.ExibirDados(lsbCidades, cidades.Raiz);
 
                     MessageBox.Show("Cidade excluida com exito", "Sucesso");
@@ -253,13 +246,7 @@ namespace apProjetoArvore
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            using (var stream = File.Open(dlgAbrir.FileName, FileMode.Create))
-            {
-                using (var writer = new BinaryWriter(stream, Encoding.UTF8, false))
-                {
-                    cidades.GravarDados(cidades.Raiz, writer);
-                }
-            }
+            cidades.GravarArquivoDeRegistros(dlgAbrir.FileName);
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -267,31 +254,29 @@ namespace apProjetoArvore
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (button1.Text == "Árvore")
-            {
-                button1.Text = "Mapa";
-                pbMapa.CreateGraphics().Clear(Color.Black);
-                pbMapa.Image = null;
-                pbMapa.Invalidate();
-            }
-            else
-            {
-                button1.Text = "Árvore";
-                pbMapa.Image = Properties.Resources.mapaEspanhaPortugal;
-            }
-        }
-
         private void lsbCidades_SelectedIndexChanged(object sender, EventArgs e)
         {
             string cidade = lsbCidades.SelectedItem.ToString();
-            string nome = cidade.Substring(0, 15);
-            string x = cidade.Substring(16, 6);
-            string y = cidade.Substring(22, 5);
-            txtNome.Text = nome;
-            txtCoordX.Text = x;
-            txtCoordY.Text = y;
+            if(cidade.Substring(0, 15) != "Nome")
+            {
+                string nome = cidade.Substring(0, 15);
+                string x = cidade.Substring(16, 6);
+                string y = cidade.Substring(22, 5);
+                txtNome.Text = nome;
+                txtCoordX.Text = x;
+                txtCoordY.Text = y;
+            }
+        }
+
+        private void tabPage4_Enter(object sender, EventArgs e)
+        {
+            pbArvore.CreateGraphics().Clear(Color.Black);
+            pbArvore.Invalidate();
+        }
+
+        private void pbArvore_Paint(object sender, PaintEventArgs e)
+        {
+            cidades.DesenharArvore(pbArvore.Width / 2, 0, e.Graphics);
         }
     }
 }

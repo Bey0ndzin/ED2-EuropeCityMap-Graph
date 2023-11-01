@@ -11,7 +11,8 @@ namespace apProjetoArvore
         Dado info;
         NoArvore<Dado> esquerda;
         NoArvore<Dado> direita;
-        
+        ListaDupla<Dado> caminhos;
+
         public NoArvore(Dado novo)
         {
             info = novo;

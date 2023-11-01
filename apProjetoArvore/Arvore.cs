@@ -12,7 +12,6 @@ namespace apProjetoArvore
 {
     public class Arvore<Dado> : IArvore<Dado> where Dado : IComparable<Dado>, IRegistro<Dado>, new()
     {
-        ListaDupla<Dado> caminhos;
         NoArvore<Dado> atual, antecessor, raiz;
         Situacao situacao = Situacao.navegando;
         public Arvore()
@@ -120,7 +119,7 @@ namespace apProjetoArvore
         }
         public void DesenharArvore(int x, int y, Graphics g)
         {
-            DesenharArvore(true, raiz, x, y, 60, 0.5, 100, g);
+            DesenharArvore(true, raiz, x, y, 60, 0.5, 400, g);
         }
         public void DesenharArvore(bool primeiraVez, NoArvore<Dado> raiz,
                             int x, int y, double angulo, double incremento,
@@ -130,19 +129,22 @@ namespace apProjetoArvore
             if (raiz != null)
             {
                 Pen caneta = new Pen(Color.Green);
-                xf = (int)Math.Round(x + Math.Cos(angulo) * comprimento*2);
-                yf = (int)Math.Round(y + Math.Sin(angulo) * comprimento);
+                xf = (int)Math.Round(x + Math.Cos(angulo) * comprimento);
+                yf = (int)Math.Round(y + Math.Sin(angulo) * comprimento/2);
                 if (primeiraVez)
+                {
                     yf = 25;
+                    xf = x;
+                }
                 g.DrawLine(caneta, x, y, xf, yf);
                 DesenharArvore(false, raiz.Esq, xf, yf, Math.PI / 2 + incremento,
-                incremento * 0.6, comprimento * 0.8, g);
+                incremento * 0.6, comprimento*0.8, g);
                 DesenharArvore(false, raiz.Dir, xf, yf, Math.PI / 2 - incremento,
-                incremento * 0.6, comprimento * 0.8, g);
+                incremento * 0.6, comprimento*0.8, g);
                 SolidBrush preenchimento = new SolidBrush(Color.Blue);
                 g.FillEllipse(preenchimento, xf - 25, yf - 15, 64, 30);
-                g.DrawString(Convert.ToString(raiz.Info.ToString()), new Font("Comic Sans", 10),
-                new SolidBrush(Color.Yellow), xf - 23, yf - 7);
+                g.DrawString(Convert.ToString(raiz.Info.ToString().Substring(0, 15)), new Font("Comic Sans", 10),
+                new SolidBrush(Color.Yellow), xf - 20, yf - 7);
             }
         }
 
@@ -184,38 +186,19 @@ namespace apProjetoArvore
                 }
             }
         }
-        public void GravarDados(NoArvore<Dado> atual, BinaryWriter writer)
+        public void GravarArquivoDeRegistros(string nomeArquivo)
         {
-            if(atual != null)
+            var destino = new FileStream(nomeArquivo, FileMode.Create);
+            var arquivo = new BinaryWriter(destino);
+            GravarInOrdem(raiz);
+            arquivo.Close();
+            void GravarInOrdem(NoArvore<Dado> r)
             {
-                atual.Info.GravarRegistro(writer);
-                GravarDados(atual.Esq, writer);
-                GravarDados(atual.Dir, writer);
-            }
-        }
-        public void LerCaminhos(string nomeArquivo)
-        {
-            raiz = null;
-            Dado dado = new Dado();
-            var origem = new FileStream(nomeArquivo, FileMode.OpenOrCreate);
-            var arquivo = new BinaryReader(origem);
-            int posicaoFinal = (int)origem.Length / dado.TamanhoRegistro - 1;
-            Particionar(0, posicaoFinal, ref raiz);
-            origem.Close();
-            void Particionar(long inicio, long fim, ref NoArvore<Dado> atual)
-            {
-                if (inicio <= fim)
+                if (r != null)
                 {
-                    long meio = (inicio + fim) / 2;
-                    dado = new Dado();
-                    dado.LerRegistro(arquivo, meio); // 
-                    atual = new NoArvore<Dado>(dado);
-                    var novoEsq = atual.Esq;
-                    Particionar(inicio, meio - 1, ref novoEsq); // Particiona à esquerda 
-                    atual.Esq = novoEsq;
-                    var novoDir = atual.Dir;
-                    Particionar(meio + 1, fim, ref novoDir); // Particiona à direita 
-                    atual.Dir = novoDir;
+                    GravarInOrdem(r.Esq);
+                    r.Info.GravarRegistro(arquivo);
+                    GravarInOrdem(r.Dir);
                 }
             }
         }
