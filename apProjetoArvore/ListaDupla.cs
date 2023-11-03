@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
-public class ListaDupla<Dado> : IDados<Dado>
+public class ListaDupla<Dado> : IDados<Dado>, IEnumerable<Dado>
                 where Dado : IComparable<Dado>, IRegistro<Dado>, new()
 {
     NoDuplo<Dado> primeiro, ultimo, atual;
@@ -305,5 +306,19 @@ public class ListaDupla<Dado> : IDados<Dado>
     public bool PodePercorrer()
     {
         return atual != null;
+    }
+    public IEnumerator<Dado> GetEnumerator()
+    {
+        var current = primeiro;
+        while (current != null)
+        {
+            yield return current.Info;
+            current = current.Prox;
+        }
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
     }
 }

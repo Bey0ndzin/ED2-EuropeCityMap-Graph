@@ -309,5 +309,11 @@ namespace apProjetoArvore
             }
             return sucessor;
         }
+        public List<Cidade> ObterListaDeCidades()
+        {
+            List<Cidade> cidades = new List<Cidade>();
+            return cidades;
+        }
+
     }
 }

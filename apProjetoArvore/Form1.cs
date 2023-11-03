@@ -49,11 +49,22 @@ namespace apProjetoArvore
                 txtCoordY.Text = cid.Y.ToString();
                 cidades.SituacaoAtual = Situacao.navegando;
 
+
                 VerificarBotoes();
+            }
+            foreach (Cidade cidade in cidades.ObterListaDeCidades())
+            {
+                cbOrigem.Items.Add(cidade.Nome);
+                cbDestino.Items.Add(cidade.Nome);
             }
 
             if (dlgLigacao.ShowDialog() == DialogResult.OK)
             {
+                
+                dgvCaminhos.Columns.Add("Origem", "Origem");
+                dgvCaminhos.Columns.Add("Destino", "Destino");
+                dgvCaminhos.Columns.Add("Distancia", "Distancia");
+                dgvCaminhos.Columns.Add("Tempo", "Tempo");
                 Ligacao dado = new Ligacao();
                 var origem = new FileStream(dlgLigacao.FileName, FileMode.OpenOrCreate);
                 var arquivo = new BinaryReader(origem);
@@ -65,10 +76,18 @@ namespace apProjetoArvore
                     dado.LerRegistro(arquivo, inicio);
                     cidades.Existe(new Cidade(dado.Origem, 0, 0));
                     if(cidades.Atual != null)
+                    {
                         cidades.Atual.Caminhos.IncluirAposFim(dado);
+                        foreach (var caminho in cidades.Atual.Caminhos)
+                        {
+                            dgvCaminhos.Rows.Add(caminho.Origem, caminho.Destino, caminho.Distancia, caminho.Tempo);
+                        }
+                    }
                     inicio++;
                 }
                 origem.Close();
+                
+
             }
         }
         private void VerificarBotoes()
@@ -288,7 +307,7 @@ namespace apProjetoArvore
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             cidades.GravarArquivoDeRegistros(dlgAbrir.FileName);
-        }
+        }   
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -319,5 +338,44 @@ namespace apProjetoArvore
         {
             cidades.DesenharArvore(pbArvore.Width / 2, 0, e.Graphics);
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void cbDestino_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSoma_Click(object sender, EventArgs e)
+        {
+            string origem = cbOrigem.SelectedItem.ToString();
+            string destino = cbDestino.SelectedItem.ToString();
+            int distancia = (int)numDistancia.Value;
+            int tempo = (int)numTempo.Value;
+
+            Ligacao novoCaminho = new Ligacao(origem, destino, distancia, tempo);
+
+            if (cidades.Atual != null)
+            {
+                cidades.Atual.Caminhos.IncluirAposFim(novoCaminho);
+
+                AtualizarDataGridViewCaminhos();
+            }
+        }
+        private void AtualizarDataGridViewCaminhos()
+        {
+            dgvCaminhos.Rows.Clear();
+
+            foreach (Ligacao caminho in cidades.Atual.Caminhos)
+            {
+                dgvCaminhos.Rows.Add(caminho.Origem, caminho.Destino, caminho.Distancia, caminho.Tempo);
+            }
+        }
     }
+
+
+
 }

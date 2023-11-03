@@ -56,9 +56,7 @@
             this.btnHash = new System.Windows.Forms.Button();
             this.btnSubtrai = new System.Windows.Forms.Button();
             this.btnSoma = new System.Windows.Forms.Button();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label10 = new System.Windows.Forms.Label();
+            this.numTempo = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.numDistancia = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
@@ -70,6 +68,7 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.pbArvore = new System.Windows.Forms.PictureBox();
             this.dlgLigacao = new System.Windows.Forms.OpenFileDialog();
+            this.dgvCaminhos = new System.Windows.Forms.DataGridView();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -77,11 +76,11 @@
             this.gbCidades.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMapa)).BeginInit();
             this.gbCaminhos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTempo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numDistancia)).BeginInit();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbArvore)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCaminhos)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -231,7 +230,7 @@
             this.gbCidades.Controls.Add(this.label3);
             this.gbCidades.Controls.Add(this.txtNome);
             this.gbCidades.Controls.Add(this.label2);
-            this.gbCidades.Location = new System.Drawing.Point(6, 6);
+            this.gbCidades.Location = new System.Drawing.Point(293, 6);
             this.gbCidades.Name = "gbCidades";
             this.gbCidades.Size = new System.Drawing.Size(281, 382);
             this.gbCidades.TabIndex = 0;
@@ -333,13 +332,12 @@
             // 
             this.gbCaminhos.BackColor = System.Drawing.Color.Transparent;
             this.gbCaminhos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.gbCaminhos.Controls.Add(this.dgvCaminhos);
             this.gbCaminhos.Controls.Add(this.btnCidades);
             this.gbCaminhos.Controls.Add(this.btnHash);
             this.gbCaminhos.Controls.Add(this.btnSubtrai);
             this.gbCaminhos.Controls.Add(this.btnSoma);
-            this.gbCaminhos.Controls.Add(this.numericUpDown2);
-            this.gbCaminhos.Controls.Add(this.numericUpDown1);
-            this.gbCaminhos.Controls.Add(this.label10);
+            this.gbCaminhos.Controls.Add(this.numTempo);
             this.gbCaminhos.Controls.Add(this.label9);
             this.gbCaminhos.Controls.Add(this.numDistancia);
             this.gbCaminhos.Controls.Add(this.label8);
@@ -350,7 +348,7 @@
             this.gbCaminhos.Controls.Add(this.label5);
             this.gbCaminhos.Location = new System.Drawing.Point(8, 6);
             this.gbCaminhos.Name = "gbCaminhos";
-            this.gbCaminhos.Size = new System.Drawing.Size(279, 382);
+            this.gbCaminhos.Size = new System.Drawing.Size(279, 408);
             this.gbCaminhos.TabIndex = 3;
             this.gbCaminhos.TabStop = false;
             this.gbCaminhos.Text = "Caminhos";
@@ -360,7 +358,7 @@
             // 
             this.btnCidades.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCidades.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCidades.Location = new System.Drawing.Point(76, 334);
+            this.btnCidades.Location = new System.Drawing.Point(72, 374);
             this.btnCidades.Name = "btnCidades";
             this.btnCidades.Size = new System.Drawing.Size(109, 28);
             this.btnCidades.TabIndex = 25;
@@ -372,7 +370,7 @@
             // 
             this.btnHash.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHash.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHash.Location = new System.Drawing.Point(125, 232);
+            this.btnHash.Location = new System.Drawing.Point(126, 196);
             this.btnHash.Name = "btnHash";
             this.btnHash.Size = new System.Drawing.Size(47, 41);
             this.btnHash.TabIndex = 24;
@@ -383,7 +381,7 @@
             // 
             this.btnSubtrai.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubtrai.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubtrai.Location = new System.Drawing.Point(72, 232);
+            this.btnSubtrai.Location = new System.Drawing.Point(73, 196);
             this.btnSubtrai.Name = "btnSubtrai";
             this.btnSubtrai.Size = new System.Drawing.Size(47, 41);
             this.btnSubtrai.TabIndex = 23;
@@ -394,36 +392,20 @@
             // 
             this.btnSoma.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSoma.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSoma.Location = new System.Drawing.Point(19, 232);
+            this.btnSoma.Location = new System.Drawing.Point(20, 196);
             this.btnSoma.Name = "btnSoma";
             this.btnSoma.Size = new System.Drawing.Size(47, 41);
             this.btnSoma.TabIndex = 22;
             this.btnSoma.Text = "+";
             this.btnSoma.UseVisualStyleBackColor = true;
+            this.btnSoma.Click += new System.EventHandler(this.btnSoma_Click);
             // 
-            // numericUpDown2
+            // numTempo
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(84, 198);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(85, 20);
-            this.numericUpDown2.TabIndex = 21;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(84, 165);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(85, 20);
-            this.numericUpDown1.TabIndex = 20;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(17, 198);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(41, 15);
-            this.label10.TabIndex = 19;
-            this.label10.Text = "Custo:";
+            this.numTempo.Location = new System.Drawing.Point(84, 165);
+            this.numTempo.Name = "numTempo";
+            this.numTempo.Size = new System.Drawing.Size(85, 20);
+            this.numTempo.TabIndex = 20;
             // 
             // label9
             // 
@@ -459,6 +441,7 @@
             this.cbDestino.Name = "cbDestino";
             this.cbDestino.Size = new System.Drawing.Size(84, 21);
             this.cbDestino.TabIndex = 15;
+            this.cbDestino.SelectedIndexChanged += new System.EventHandler(this.cbDestino_SelectedIndexChanged);
             // 
             // cbOrigem
             // 
@@ -527,6 +510,15 @@
             // 
             this.dlgLigacao.FileName = "GrafoTremEspanhaPortugal";
             // 
+            // dgvCaminhos
+            // 
+            this.dgvCaminhos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCaminhos.Location = new System.Drawing.Point(0, 243);
+            this.dgvCaminhos.Name = "dgvCaminhos";
+            this.dgvCaminhos.Size = new System.Drawing.Size(279, 125);
+            this.dgvCaminhos.TabIndex = 26;
+            this.dgvCaminhos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -550,11 +542,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbMapa)).EndInit();
             this.gbCaminhos.ResumeLayout(false);
             this.gbCaminhos.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTempo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numDistancia)).EndInit();
             this.tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbArvore)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCaminhos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -584,9 +576,7 @@
         private System.Windows.Forms.Button btnHash;
         private System.Windows.Forms.Button btnSubtrai;
         private System.Windows.Forms.Button btnSoma;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.NumericUpDown numTempo;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown numDistancia;
         private System.Windows.Forms.Label label8;
@@ -603,6 +593,7 @@
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.PictureBox pbArvore;
         private System.Windows.Forms.OpenFileDialog dlgLigacao;
+        private System.Windows.Forms.DataGridView dgvCaminhos;
     }
 }
 

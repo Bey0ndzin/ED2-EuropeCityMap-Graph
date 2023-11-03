@@ -20,3 +20,13 @@ C:\Users\Pichau\Documents\GitHub\Projeto-I-ED2\apProjetoArvore\obj\Debug\apProje
 C:\Users\Pichau\Documents\GitHub\Projeto-I-ED2\apProjetoArvore\obj\Debug\apProjetoArvore.csproj.CoreCompileInputs.cache
 C:\Users\Pichau\Documents\GitHub\Projeto-I-ED2\apProjetoArvore\obj\Debug\apProjetoArvore.exe
 C:\Users\Pichau\Documents\GitHub\Projeto-I-ED2\apProjetoArvore\obj\Debug\apProjetoArvore.pdb
+C:\Users\vitor\OneDrive\Documentos\GitHub\Projeto-I-ED2\apProjetoArvore\bin\Debug\apProjetoArvore.exe.config
+C:\Users\vitor\OneDrive\Documentos\GitHub\Projeto-I-ED2\apProjetoArvore\bin\Debug\apProjetoArvore.exe
+C:\Users\vitor\OneDrive\Documentos\GitHub\Projeto-I-ED2\apProjetoArvore\bin\Debug\apProjetoArvore.pdb
+C:\Users\vitor\OneDrive\Documentos\GitHub\Projeto-I-ED2\apProjetoArvore\obj\Debug\apProjetoArvore.csproj.AssemblyReference.cache
+C:\Users\vitor\OneDrive\Documentos\GitHub\Projeto-I-ED2\apProjetoArvore\obj\Debug\apProjetoArvore.Form1.resources
+C:\Users\vitor\OneDrive\Documentos\GitHub\Projeto-I-ED2\apProjetoArvore\obj\Debug\apProjetoArvore.Properties.Resources.resources
+C:\Users\vitor\OneDrive\Documentos\GitHub\Projeto-I-ED2\apProjetoArvore\obj\Debug\apProjetoArvore.csproj.GenerateResource.cache
+C:\Users\vitor\OneDrive\Documentos\GitHub\Projeto-I-ED2\apProjetoArvore\obj\Debug\apProjetoArvore.csproj.CoreCompileInputs.cache
+C:\Users\vitor\OneDrive\Documentos\GitHub\Projeto-I-ED2\apProjetoArvore\obj\Debug\apProjetoArvore.exe
+C:\Users\vitor\OneDrive\Documentos\GitHub\Projeto-I-ED2\apProjetoArvore\obj\Debug\apProjetoArvore.pdb
