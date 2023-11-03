@@ -189,7 +189,7 @@ namespace apProjetoArvore
             }
             if (cidades.SituacaoAtual == Situacao.pesquisando)
             {
-                int esp = (pbMapa.Bounds.Width / 150)/2;
+                int esp = pbMapa.Bounds.Width / 150 / 2;
                 double raio = double.Parse(esp.ToString()) / 100;
 
                 double largura = pbMapa.Bounds.Width;
@@ -200,15 +200,32 @@ namespace apProjetoArvore
                 double porcentagemX = Math.Round(xClicado / largura, 3);
                 double porcentagemY = Math.Round(yClicado / altura, 3);
 
-                bool achou = cidades.Existe(cidades.Raiz, porcentagemX, porcentagemY, raio);
-                if (!achou)
+                NoArvore<Cidade> procurada = null;
+                void Existe(NoArvore<Cidade> atual)
+                {
+                    if (atual != null)
+                    {
+                        double distX = Math.Abs(porcentagemX - atual.Info.X);
+                        double distY = Math.Abs(porcentagemY - atual.Info.Y);
+                        if (distX <= raio
+                            && distY <= raio)
+                        {
+                            procurada = atual;
+                        }
+                        Existe(atual.Esq);
+                        Existe(atual.Dir);
+                    }
+                }
+
+                Existe(cidades.Raiz);
+                if (procurada == null)
                     MessageBox.Show("Não foi encontrado uma cidade nessa posição", "Falha ao encontrar cidade");
-                if (achou)
+                else
                 {
                     Cidade cid = cidades.DadoAtual();
-                    txtNome.Text = cid.Nome;
-                    txtCoordX.Text = cid.X.ToString();
-                    txtCoordY.Text = cid.Y.ToString();
+                    txtNome.Text = procurada.Info.Nome;
+                    txtCoordX.Text = procurada.Info.X.ToString();
+                    txtCoordY.Text = procurada.Info.Y.ToString();
                     MessageBox.Show("Cidade encontrada", "Cidade encontrada");
                 }
             }

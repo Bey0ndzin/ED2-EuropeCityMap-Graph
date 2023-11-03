@@ -42,22 +42,6 @@ namespace apProjetoArvore
             }
             return false;
         }
-        public bool Existe(NoArvore<Cidade> atual, double porcX, double porcY, double raio)
-        {
-            if (atual != null)
-            {
-                double distX = Math.Abs(porcX - atual.Info.X);
-                double distY = Math.Abs(porcY - atual.Info.Y);
-                if (distX <= raio
-                    && distY <= raio)
-                {
-                    return true;
-                }
-                Existe(atual.Esq, porcX, porcY, raio);
-                Existe(atual.Dir, porcX, porcY, raio);
-            }
-            return false;
-        }
         public void Inserir(Dado novosDados)
         {
             bool achou = false, fim = false;
