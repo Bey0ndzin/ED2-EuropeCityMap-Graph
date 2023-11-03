@@ -51,8 +51,26 @@ namespace apProjetoArvore
 
                 VerificarBotoes();
             }
-        }
 
+            if (dlgLigacao.ShowDialog() == DialogResult.OK)
+            {
+                Ligacao dado = new Ligacao();
+                var origem = new FileStream(dlgLigacao.FileName, FileMode.OpenOrCreate);
+                var arquivo = new BinaryReader(origem);
+                int posicaoFinal = (int)origem.Length / dado.TamanhoRegistro - 1;
+                int inicio = 1;
+                while (inicio <= posicaoFinal)
+                {
+                    dado = new Ligacao();
+                    dado.LerRegistro(arquivo, inicio);
+                    cidades.Existe(new Cidade(dado.Origem, 0, 0));
+                    if(cidades.Atual != null)
+                        cidades.Atual.Caminhos.IncluirAposFim(dado);
+                    inicio++;
+                }
+                origem.Close();
+            }
+        }
         private void VerificarBotoes()
         {
             if(cidades.SituacaoAtual == Situacao.navegando)
@@ -149,7 +167,7 @@ namespace apProjetoArvore
 
                 try
                 {
-                    cidades.Inserir(new Cidade(txtNome.Text, porcentagemX, porcentagemY));
+                    cidades.IncluirNovoRegistro(new Cidade(txtNome.Text, porcentagemX, porcentagemY));
                     MessageBox.Show("Cidade incluida com exito", "Sucesso");
                 }
                 catch (Exception ex)
@@ -200,13 +218,36 @@ namespace apProjetoArvore
 
         private void pbMapa_Paint(object sender, PaintEventArgs e)
         {
-                Graphics g = e.Graphics;
-                int esp = pbMapa.Bounds.Width / 150;
-                Pen pen = new Pen(Color.Black, esp);
-                cidades.PosicionarNaRaiz();
-                cidades.DesenharMapa(true, pbMapa.Bounds.Width, pbMapa.Bounds.Height, pen, cidades.Raiz, esp, g);
+            int esp = pbMapa.Bounds.Width / 150;
+            Graphics g = e.Graphics;
+            Pen pen = new Pen(Color.Red, esp);
+            DesenharCaminhos(cidades.Raiz);
+            void DesenharCaminhos(NoArvore<Cidade> raiz)
+            {
+                if (raiz != null)
+                {
+                    ListaDupla<Ligacao> caminhos = raiz.Caminhos;
+                    caminhos.PosicionarNoPrimeiro();
+                    while (caminhos.PodePercorrer())
+                    {
+                        cidades.Existe(new Cidade(caminhos.DadoAtual().Destino, 0, 0));
+                        float x1 = (pbMapa.Bounds.Width * (float)raiz.Info.X) - esp/2;
+                        float y1 = (pbMapa.Bounds.Height * (float)raiz.Info.Y) - esp / 2;
+                        if(cidades.Atual != null)
+                        {
+                            float x2 = (pbMapa.Bounds.Width * (float)cidades.Atual.Info.X) - esp / 2;
+                            float y2 = (pbMapa.Bounds.Height * (float)cidades.Atual.Info.Y) - esp / 2;
+                            g.DrawLine(pen, x1, y1, x2, y2);
+                        }
+                        caminhos.AvancarPosicao();
+                    }
+                    DesenharCaminhos(raiz.Esq);
+                    DesenharCaminhos(raiz.Dir);
+                }
+            }
+            cidades.PosicionarNaRaiz();
+            cidades.DesenharMapa(true, pbMapa.Bounds.Width, pbMapa.Bounds.Height, new Pen(Color.Black, esp), cidades.Raiz, esp, g);
         }
-
         private void btnSair_Click(object sender, EventArgs e)
         {
             this.Close();

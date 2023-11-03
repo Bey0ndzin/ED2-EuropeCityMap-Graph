@@ -154,7 +154,7 @@ namespace apProjetoArvore
             if (raiz != null)
             {
                 float x = (larguraMapa * float.Parse(raiz.Info.X.ToString())) - espessura/2;
-                float y = (alturaMapa * float.Parse(raiz.Info.Y.ToString())) - espessura / 2;
+                float y = (alturaMapa * float.Parse(raiz.Info.Y.ToString())) - espessura/2;
                 g.DrawEllipse(caneta, x, y, espessura, espessura);
                 DesenharMapa(false, larguraMapa, alturaMapa, caneta, raiz.Esq, espessura, g);
                 DesenharMapa(false, larguraMapa, alturaMapa, caneta, raiz.Dir, espessura, g);

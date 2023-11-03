@@ -39,6 +39,18 @@
             this.btnSair = new System.Windows.Forms.ToolStripButton();
             this.dlgAbrir = new System.Windows.Forms.OpenFileDialog();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.gbCidades = new System.Windows.Forms.GroupBox();
+            this.btnCaminhos = new System.Windows.Forms.Button();
+            this.lsbCidades = new System.Windows.Forms.ListBox();
+            this.txtCoordY = new System.Windows.Forms.TextBox();
+            this.txtCoordX = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtNome = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.pbMapa = new System.Windows.Forms.PictureBox();
             this.gbCaminhos = new System.Windows.Forms.GroupBox();
             this.btnCidades = new System.Windows.Forms.Button();
             this.btnHash = new System.Windows.Forms.Button();
@@ -55,30 +67,19 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.gbCidades = new System.Windows.Forms.GroupBox();
-            this.btnCaminhos = new System.Windows.Forms.Button();
-            this.lsbCidades = new System.Windows.Forms.ListBox();
-            this.txtCoordY = new System.Windows.Forms.TextBox();
-            this.txtCoordX = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtNome = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.pbMapa = new System.Windows.Forms.PictureBox();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.pbArvore = new System.Windows.Forms.PictureBox();
+            this.dlgLigacao = new System.Windows.Forms.OpenFileDialog();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.tabControl2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.gbCidades.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMapa)).BeginInit();
             this.gbCaminhos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numDistancia)).BeginInit();
-            this.gbCidades.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMapa)).BeginInit();
-            this.tabControl2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbArvore)).BeginInit();
             this.SuspendLayout();
@@ -193,6 +194,140 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(800, 456);
             this.panel1.TabIndex = 1;
+            // 
+            // tabControl2
+            // 
+            this.tabControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl2.Controls.Add(this.tabPage3);
+            this.tabControl2.Controls.Add(this.tabPage4);
+            this.tabControl2.Location = new System.Drawing.Point(0, 7);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(797, 446);
+            this.tabControl2.TabIndex = 27;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tabPage3.Controls.Add(this.gbCidades);
+            this.tabPage3.Controls.Add(this.pbMapa);
+            this.tabPage3.Controls.Add(this.gbCaminhos);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(789, 420);
+            this.tabPage3.TabIndex = 0;
+            this.tabPage3.Text = "Mapa";
+            // 
+            // gbCidades
+            // 
+            this.gbCidades.Controls.Add(this.btnCaminhos);
+            this.gbCidades.Controls.Add(this.lsbCidades);
+            this.gbCidades.Controls.Add(this.txtCoordY);
+            this.gbCidades.Controls.Add(this.txtCoordX);
+            this.gbCidades.Controls.Add(this.label4);
+            this.gbCidades.Controls.Add(this.label3);
+            this.gbCidades.Controls.Add(this.txtNome);
+            this.gbCidades.Controls.Add(this.label2);
+            this.gbCidades.Location = new System.Drawing.Point(6, 6);
+            this.gbCidades.Name = "gbCidades";
+            this.gbCidades.Size = new System.Drawing.Size(281, 382);
+            this.gbCidades.TabIndex = 0;
+            this.gbCidades.TabStop = false;
+            this.gbCidades.Text = "Cidades";
+            // 
+            // btnCaminhos
+            // 
+            this.btnCaminhos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCaminhos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCaminhos.Location = new System.Drawing.Point(75, 334);
+            this.btnCaminhos.Name = "btnCaminhos";
+            this.btnCaminhos.Size = new System.Drawing.Size(109, 28);
+            this.btnCaminhos.TabIndex = 9;
+            this.btnCaminhos.Text = "Caminhos";
+            this.btnCaminhos.UseVisualStyleBackColor = true;
+            this.btnCaminhos.Click += new System.EventHandler(this.btnAlternar_Click);
+            // 
+            // lsbCidades
+            // 
+            this.lsbCidades.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lsbCidades.FormattingEnabled = true;
+            this.lsbCidades.ItemHeight = 16;
+            this.lsbCidades.Location = new System.Drawing.Point(19, 123);
+            this.lsbCidades.Name = "lsbCidades";
+            this.lsbCidades.Size = new System.Drawing.Size(242, 180);
+            this.lsbCidades.TabIndex = 8;
+            this.lsbCidades.SelectedIndexChanged += new System.EventHandler(this.lsbCidades_SelectedIndexChanged);
+            // 
+            // txtCoordY
+            // 
+            this.txtCoordY.Location = new System.Drawing.Point(131, 81);
+            this.txtCoordY.Name = "txtCoordY";
+            this.txtCoordY.Size = new System.Drawing.Size(130, 20);
+            this.txtCoordY.TabIndex = 7;
+            // 
+            // txtCoordX
+            // 
+            this.txtCoordX.Location = new System.Drawing.Point(131, 53);
+            this.txtCoordX.Name = "txtCoordX";
+            this.txtCoordX.Size = new System.Drawing.Size(130, 20);
+            this.txtCoordX.TabIndex = 6;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(16, 86);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(88, 15);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Coordenada Y:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(16, 58);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(89, 15);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Coordenada X:";
+            // 
+            // txtNome
+            // 
+            this.txtNome.Location = new System.Drawing.Point(131, 25);
+            this.txtNome.MaxLength = 15;
+            this.txtNome.Name = "txtNome";
+            this.txtNome.Size = new System.Drawing.Size(130, 20);
+            this.txtNome.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(16, 25);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(103, 15);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Nome da Cidade:";
+            // 
+            // pbMapa
+            // 
+            this.pbMapa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbMapa.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.pbMapa.Image = global::apProjetoArvore.Properties.Resources.mapaEspanhaPortugal;
+            this.pbMapa.Location = new System.Drawing.Point(310, 6);
+            this.pbMapa.Name = "pbMapa";
+            this.pbMapa.Size = new System.Drawing.Size(473, 414);
+            this.pbMapa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbMapa.TabIndex = 0;
+            this.pbMapa.TabStop = false;
+            this.pbMapa.Click += new System.EventHandler(this.pbMapa_Click);
+            this.pbMapa.Paint += new System.Windows.Forms.PaintEventHandler(this.pbMapa_Paint);
             // 
             // gbCaminhos
             // 
@@ -363,140 +498,6 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Ligações";
             // 
-            // gbCidades
-            // 
-            this.gbCidades.Controls.Add(this.btnCaminhos);
-            this.gbCidades.Controls.Add(this.lsbCidades);
-            this.gbCidades.Controls.Add(this.txtCoordY);
-            this.gbCidades.Controls.Add(this.txtCoordX);
-            this.gbCidades.Controls.Add(this.label4);
-            this.gbCidades.Controls.Add(this.label3);
-            this.gbCidades.Controls.Add(this.txtNome);
-            this.gbCidades.Controls.Add(this.label2);
-            this.gbCidades.Location = new System.Drawing.Point(6, 6);
-            this.gbCidades.Name = "gbCidades";
-            this.gbCidades.Size = new System.Drawing.Size(281, 382);
-            this.gbCidades.TabIndex = 0;
-            this.gbCidades.TabStop = false;
-            this.gbCidades.Text = "Cidades";
-            // 
-            // btnCaminhos
-            // 
-            this.btnCaminhos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCaminhos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCaminhos.Location = new System.Drawing.Point(75, 334);
-            this.btnCaminhos.Name = "btnCaminhos";
-            this.btnCaminhos.Size = new System.Drawing.Size(109, 28);
-            this.btnCaminhos.TabIndex = 9;
-            this.btnCaminhos.Text = "Caminhos";
-            this.btnCaminhos.UseVisualStyleBackColor = true;
-            this.btnCaminhos.Click += new System.EventHandler(this.btnAlternar_Click);
-            // 
-            // lsbCidades
-            // 
-            this.lsbCidades.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lsbCidades.FormattingEnabled = true;
-            this.lsbCidades.ItemHeight = 16;
-            this.lsbCidades.Location = new System.Drawing.Point(19, 123);
-            this.lsbCidades.Name = "lsbCidades";
-            this.lsbCidades.Size = new System.Drawing.Size(242, 180);
-            this.lsbCidades.TabIndex = 8;
-            this.lsbCidades.SelectedIndexChanged += new System.EventHandler(this.lsbCidades_SelectedIndexChanged);
-            // 
-            // txtCoordY
-            // 
-            this.txtCoordY.Location = new System.Drawing.Point(131, 81);
-            this.txtCoordY.Name = "txtCoordY";
-            this.txtCoordY.Size = new System.Drawing.Size(130, 20);
-            this.txtCoordY.TabIndex = 7;
-            // 
-            // txtCoordX
-            // 
-            this.txtCoordX.Location = new System.Drawing.Point(131, 53);
-            this.txtCoordX.Name = "txtCoordX";
-            this.txtCoordX.Size = new System.Drawing.Size(130, 20);
-            this.txtCoordX.TabIndex = 6;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(16, 86);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(88, 15);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Coordenada Y:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(16, 58);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 15);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Coordenada X:";
-            // 
-            // txtNome
-            // 
-            this.txtNome.Location = new System.Drawing.Point(131, 25);
-            this.txtNome.MaxLength = 15;
-            this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(130, 20);
-            this.txtNome.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(16, 25);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(103, 15);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Nome da Cidade:";
-            // 
-            // pbMapa
-            // 
-            this.pbMapa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbMapa.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.pbMapa.Image = global::apProjetoArvore.Properties.Resources.mapaEspanhaPortugal;
-            this.pbMapa.Location = new System.Drawing.Point(310, 6);
-            this.pbMapa.Name = "pbMapa";
-            this.pbMapa.Size = new System.Drawing.Size(473, 414);
-            this.pbMapa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbMapa.TabIndex = 0;
-            this.pbMapa.TabStop = false;
-            this.pbMapa.Click += new System.EventHandler(this.pbMapa_Click);
-            this.pbMapa.Paint += new System.Windows.Forms.PaintEventHandler(this.pbMapa_Paint);
-            // 
-            // tabControl2
-            // 
-            this.tabControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl2.Controls.Add(this.tabPage3);
-            this.tabControl2.Controls.Add(this.tabPage4);
-            this.tabControl2.Location = new System.Drawing.Point(0, 7);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(797, 446);
-            this.tabControl2.TabIndex = 27;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.tabPage3.Controls.Add(this.gbCidades);
-            this.tabPage3.Controls.Add(this.pbMapa);
-            this.tabPage3.Controls.Add(this.gbCaminhos);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(789, 420);
-            this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "Mapa";
-            // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.pbArvore);
@@ -522,6 +523,10 @@
             this.pbArvore.TabStop = false;
             this.pbArvore.Paint += new System.Windows.Forms.PaintEventHandler(this.pbArvore_Paint);
             // 
+            // dlgLigacao
+            // 
+            this.dlgLigacao.FileName = "GrafoTremEspanhaPortugal";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -538,16 +543,16 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.tabControl2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.gbCidades.ResumeLayout(false);
+            this.gbCidades.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMapa)).EndInit();
             this.gbCaminhos.ResumeLayout(false);
             this.gbCaminhos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numDistancia)).EndInit();
-            this.gbCidades.ResumeLayout(false);
-            this.gbCidades.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMapa)).EndInit();
-            this.tabControl2.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbArvore)).EndInit();
             this.ResumeLayout(false);
@@ -597,6 +602,7 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.PictureBox pbArvore;
+        private System.Windows.Forms.OpenFileDialog dlgLigacao;
     }
 }
 

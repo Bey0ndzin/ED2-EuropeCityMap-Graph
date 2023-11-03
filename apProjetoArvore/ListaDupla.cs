@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
-class ListaDupla<Dado> : IDados<Dado>
+public class ListaDupla<Dado> : IDados<Dado>
                 where Dado : IComparable<Dado>, IRegistro<Dado>, new()
 {
     NoDuplo<Dado> primeiro, ultimo, atual;
@@ -83,8 +83,7 @@ class ListaDupla<Dado> : IDados<Dado>
     }
     public void AvancarPosicao()
     {
-        if(!EstaNoFim)
-            atual = atual.Prox;
+        atual = atual.Prox;
     }
     public void PosicionarNoUltimo()        // posicionar atual no último nó para ser acessado
     {
@@ -302,5 +301,9 @@ class ListaDupla<Dado> : IDados<Dado>
     public void Ordenar()
     {
         throw new NotImplementedException();
+    }
+    public bool PodePercorrer()
+    {
+        return atual != null;
     }
 }

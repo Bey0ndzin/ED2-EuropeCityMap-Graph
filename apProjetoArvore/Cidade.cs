@@ -19,6 +19,7 @@ public class Cidade : IComparable<Cidade>, IRegistro<Cidade>
 
     public int TamanhoRegistro { get => tamanhoRegistro; }
 
+
     public Cidade(string nome, double x, double y)
     {
         Nome = nome;

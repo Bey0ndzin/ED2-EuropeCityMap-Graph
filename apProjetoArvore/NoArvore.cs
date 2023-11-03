@@ -6,20 +6,22 @@ using System.Threading.Tasks;
 
 namespace apProjetoArvore
 {
-    public class NoArvore<Dado> : IComparable<NoArvore<Dado>> where Dado : IComparable<Dado>
+    public class NoArvore<Dado> : IComparable<NoArvore<Dado>> where Dado : IComparable<Dado>, IRegistro<Dado>, new()
     {
         Dado info;
         NoArvore<Dado> esquerda;
         NoArvore<Dado> direita;
-        ListaDupla<Dado> caminhos;
+        ListaDupla<Ligacao> caminhos;
 
         public NoArvore(Dado novo)
         {
             info = novo;
+            caminhos = new ListaDupla<Ligacao>();
         }
         public Dado Info { get { return info; } set { info = value; } }
         public NoArvore<Dado> Esq { get { return esquerda; } set { esquerda = value; } }
         public NoArvore<Dado> Dir { get { return direita; } set { direita = value; } }
+        public ListaDupla<Ligacao> Caminhos { get { return caminhos; } }
 
         public int CompareTo(NoArvore<Dado> other)
         {
