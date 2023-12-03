@@ -14,9 +14,11 @@ namespace apProjetoArvore
     {
         NoArvore<Dado> atual, antecessor, raiz;
         Situacao situacao = Situacao.navegando;
+        //Grafo caminhos;
         public Arvore()
         {
             raiz = atual = antecessor = null;
+            //caminhos = new Grafo(dgv);
         }
 
         public NoArvore<Dado> Raiz { get { return raiz; } set { raiz = value; } }
@@ -161,6 +163,7 @@ namespace apProjetoArvore
                     dado = new Dado();
                     dado.LerRegistro(arquivo, meio); // 
                     atual = new NoArvore<Dado>(dado);
+                    //InserirNoGrafo(atual);
                     var novoEsq = atual.Esq;
                     Particionar(inicio, meio - 1, ref novoEsq); // Particiona à esquerda 
                     atual.Esq = novoEsq;
@@ -299,5 +302,20 @@ namespace apProjetoArvore
             return cidades;
         }
 
+        /*public void InserirNoGrafo(Cidade dado)
+        {
+            caminhos.NovoVertice(dado);
+        }
+        public void CriarArestas()
+        {
+            for(int i = 0; i < caminhos.NumVerts; i++)
+            {
+                int par = caminhos.EncontrarPar(i);
+                if(par > -1)
+                {
+                    caminhos.NovaAresta(i, par);
+                }
+            }
+        }*/
     }
 }

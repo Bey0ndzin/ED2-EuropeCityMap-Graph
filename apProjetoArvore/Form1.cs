@@ -10,12 +10,13 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace apProjetoArvore
 {
     public partial class Form1 : Form
     {
-        Arvore<Cidade> cidades;
+        Grafo<Cidade> cidades;
         public Form1()
         {
             InitializeComponent();
@@ -34,16 +35,15 @@ namespace apProjetoArvore
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            cidades = new Arvore<Cidade>();
+            cidades = new Grafo<Cidade>(dgvCaminhos);
             if (dlgAbrir.ShowDialog() == DialogResult.OK)
             {
                 cidades.LerArquivoDeRegistros(dlgAbrir.FileName);
                 lsbCidades.Items.Clear();
                 lsbCidades.Items.Add("Nome            X     Y");
-                cidades.ExibirDados(lsbCidades, cidades.Raiz);
+                cidades.ExibirDados(lsbCidades);
 
-                cidades.PosicionarNaRaiz();
-                Cidade cid = cidades.DadoAtual();
+                Cidade cid = cidades.CidadeNaPosicao(0);
                 txtNome.Text = cid.Nome;
                 txtCoordX.Text = cid.X.ToString();
                 txtCoordY.Text = cid.Y.ToString();
@@ -56,15 +56,17 @@ namespace apProjetoArvore
             {
                 cbOrigem.Items.Add(cidade.Nome);
                 cbDestino.Items.Add(cidade.Nome);
+
             }
+
+            cbOrigem.SelectedItem = cidades.CidadeNaPosicao(0).Nome;
+            cbDestino.SelectedItem = cidades.CidadeNaPosicao(cidades.NumVerts-1).Nome;
 
             if (dlgLigacao.ShowDialog() == DialogResult.OK)
             {
-                
+                dgvCaminhos.Columns.Clear();
                 dgvCaminhos.Columns.Add("Origem", "Origem");
                 dgvCaminhos.Columns.Add("Destino", "Destino");
-                dgvCaminhos.Columns.Add("Distancia", "Distancia");
-                dgvCaminhos.Columns.Add("Tempo", "Tempo");
                 Ligacao dado = new Ligacao();
                 var origem = new FileStream(dlgLigacao.FileName, FileMode.OpenOrCreate);
                 var arquivo = new BinaryReader(origem);
@@ -74,21 +76,15 @@ namespace apProjetoArvore
                 {
                     dado = new Ligacao();
                     dado.LerRegistro(arquivo, inicio);
-                    cidades.Existe(new Cidade(dado.Origem, 0, 0));
-                    if(cidades.Atual != null)
-                    {
-                        cidades.Atual.Caminhos.IncluirAposFim(dado);
-                        foreach (var caminho in cidades.Atual.Caminhos)
-                        {
-                            dgvCaminhos.Rows.Add(caminho.Origem, caminho.Destino, caminho.Distancia, caminho.Tempo);
-                        }
-                    }
+                    int cidOrig = cidades.Existe(new Cidade(dado.Origem, 0, 0));
+                    int cidDest = cidades.Existe(new Cidade(dado.Destino, 0, 0));
+                    if(cidOrig > -1 && cidDest > -1)
+                        cidades.NovaAresta(cidOrig, cidDest);
                     inicio++;
                 }
                 origem.Close();
-                
-
             }
+            AtualizarDataGridViewCaminhos();
         }
         private void VerificarBotoes()
         {
@@ -148,14 +144,15 @@ namespace apProjetoArvore
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             cidades.SituacaoAtual = Situacao.editando;
-            if(cidades.Existe(new Cidade(txtNome.Text, 0, 0)))
+            int pos = cidades.Existe(new Cidade(txtNome.Text, 0, 0));
+            if (pos > -1)
             {
                 try
                 {
                     double X = double.Parse(txtCoordX.Text);
                     double Y = double.Parse(txtCoordY.Text);
-                    cidades.DadoAtual().X = X;
-                    cidades.DadoAtual().Y = Y;
+                    cidades.CidadeNaPosicao(pos).X = X;
+                    cidades.CidadeNaPosicao(pos).Y = Y;
                 }catch(Exception ex) 
                 {
                     MessageBox.Show("Digite valores válidos!", "Valores inválidos!");
@@ -165,7 +162,7 @@ namespace apProjetoArvore
 
                 lsbCidades.Items.Clear();
                 lsbCidades.Items.Add("Nome            X     Y");
-                cidades.ExibirDados(lsbCidades, cidades.Raiz);
+                cidades.ExibirDados(lsbCidades);
 
                 VerificarBotoes();
             }
@@ -186,7 +183,7 @@ namespace apProjetoArvore
 
                 try
                 {
-                    cidades.IncluirNovoRegistro(new Cidade(txtNome.Text, porcentagemX, porcentagemY));
+                    cidades.NovoVertice(new Cidade(txtNome.Text, porcentagemX, porcentagemY));
                     MessageBox.Show("Cidade incluida com exito", "Sucesso");
                 }
                 catch (Exception ex)
@@ -194,15 +191,15 @@ namespace apProjetoArvore
                     MessageBox.Show("Falha ao incluir cidade: "+ex.Message, "Falha");
                 }
 
-                cidades.Existe(new Cidade(txtNome.Text, porcentagemX, porcentagemY));
-                Cidade cid = cidades.DadoAtual();
+                int pos = cidades.Existe(new Cidade(txtNome.Text, porcentagemX, porcentagemY));
+                Cidade cid = cidades.CidadeNaPosicao(pos);
                 txtNome.Text = cid.Nome;
                 txtCoordX.Text = cid.X.ToString();
                 txtCoordY.Text = cid.Y.ToString();
 
                 lsbCidades.Items.Clear();
                 lsbCidades.Items.Add("Nome            X     Y");
-                cidades.ExibirDados(lsbCidades, cidades.Raiz);
+                cidades.ExibirDados(lsbCidades);
 
                 pbMapa.Refresh();
             }
@@ -219,32 +216,29 @@ namespace apProjetoArvore
                 double porcentagemX = Math.Round(xClicado / largura, 3);
                 double porcentagemY = Math.Round(yClicado / altura, 3);
 
-                NoArvore<Cidade> procurada = null;
-                void Existe(NoArvore<Cidade> atual)
+                Cidade procurada = null;
+                void ProcurarPorClick()
                 {
-                    if (atual != null)
+                    for (int i = 0; i < cidades.NumVerts; i++)
                     {
-                        double distX = Math.Abs(porcentagemX - atual.Info.X);
-                        double distY = Math.Abs(porcentagemY - atual.Info.Y);
+                        double distX = Math.Abs(porcentagemX - cidades.CidadeNaPosicao(i).X);
+                        double distY = Math.Abs(porcentagemY - cidades.CidadeNaPosicao(i).Y);
                         if (distX <= raio
                             && distY <= raio)
                         {
-                            procurada = atual;
+                            procurada = cidades.CidadeNaPosicao(i);
                         }
-                        Existe(atual.Esq);
-                        Existe(atual.Dir);
                     }
                 }
 
-                Existe(cidades.Raiz);
+                ProcurarPorClick();
                 if (procurada == null)
                     MessageBox.Show("Não foi encontrado uma cidade nessa posição", "Falha ao encontrar cidade");
                 else
                 {
-                    Cidade cid = cidades.DadoAtual();
-                    txtNome.Text = procurada.Info.Nome;
-                    txtCoordX.Text = procurada.Info.X.ToString();
-                    txtCoordY.Text = procurada.Info.Y.ToString();
+                    txtNome.Text = procurada.Nome;
+                    txtCoordX.Text = procurada.X.ToString();
+                    txtCoordY.Text = procurada.Y.ToString();
                     MessageBox.Show("Cidade encontrada", "Cidade encontrada");
                 }
             }
@@ -256,33 +250,31 @@ namespace apProjetoArvore
         {
             int esp = pbMapa.Bounds.Width / 150;
             Graphics g = e.Graphics;
-            Pen pen = new Pen(Color.Red, esp);
-            DesenharCaminhos(cidades.Raiz);
-            void DesenharCaminhos(NoArvore<Cidade> raiz)
+            Pen penCaminhos = new Pen(Color.Red, esp);
+            Pen penCidade = new Pen(Color.Black, esp);
+            int[,] caminhos = cidades.AdjMatrix;
+            for (int i = 0; i < cidades.NumVerts; i++)
             {
-                if (raiz != null)
+                for(int j = i+1; j < cidades.NumVerts; j++)
                 {
-                    ListaDupla<Ligacao> caminhos = raiz.Caminhos;
-                    caminhos.PosicionarNoPrimeiro();
-                    while (caminhos.PodePercorrer())
+                    if (caminhos[i, j] == 1)
                     {
-                        cidades.Existe(new Cidade(caminhos.DadoAtual().Destino, 0, 0));
-                        float x1 = (pbMapa.Bounds.Width * (float)raiz.Info.X) - esp/2;
-                        float y1 = (pbMapa.Bounds.Height * (float)raiz.Info.Y) - esp / 2;
-                        if(cidades.Atual != null)
-                        {
-                            float x2 = (pbMapa.Bounds.Width * (float)cidades.Atual.Info.X) - esp / 2;
-                            float y2 = (pbMapa.Bounds.Height * (float)cidades.Atual.Info.Y) - esp / 2;
-                            g.DrawLine(pen, x1, y1, x2, y2);
-                        }
-                        caminhos.AvancarPosicao();
+                        float x1 = (pbMapa.Bounds.Width * (float)cidades.CidadeNaPosicao(i).X) - esp / 2;
+                        float y1 = (pbMapa.Bounds.Height * (float)cidades.CidadeNaPosicao(i).Y) - esp / 2;
+
+                        float x2 = (pbMapa.Bounds.Width * (float)cidades.CidadeNaPosicao(j).X) - esp / 2;
+                        float y2 = (pbMapa.Bounds.Height * (float)cidades.CidadeNaPosicao(j).Y) - esp / 2;
+
+                        g.DrawLine(penCaminhos, x1, y1, x2, y2);
                     }
-                    DesenharCaminhos(raiz.Esq);
-                    DesenharCaminhos(raiz.Dir);
                 }
             }
-            cidades.PosicionarNaRaiz();
-            cidades.DesenharMapa(true, pbMapa.Bounds.Width, pbMapa.Bounds.Height, new Pen(Color.Black, esp), cidades.Raiz, esp, g);
+            for (int i = 0; i < cidades.NumVerts; i++)
+            {
+                float x = (pbMapa.Width * float.Parse(cidades.CidadeNaPosicao(i).X.ToString())) - esp / 2;
+                float y = (pbMapa.Height * float.Parse(cidades.CidadeNaPosicao(i).Y.ToString())) - esp / 2;
+                g.DrawEllipse(penCidade, x, y, esp, esp);
+            }
         }
         private void btnSair_Click(object sender, EventArgs e)
         {
@@ -293,27 +285,24 @@ namespace apProjetoArvore
         {
             try
             {
-                if(cidades.ApagarNo(new Cidade(txtNome.Text, 0, 0)))
+                int pos = cidades.Existe(new Cidade(txtNome.Text, 0, 0));
+                if(pos == -1)
                 {
-                    Cidade cid = cidades.DadoAtual();
-                    txtNome.Text = cid.Nome;
-                    txtCoordX.Text = cid.X.ToString();
-                    txtCoordY.Text = cid.Y.ToString();
-
-                    lsbCidades.Items.Clear();
-                    lsbCidades.Items.Add("Nome            X     Y");
-                    cidades.ExibirDados(lsbCidades, cidades.Raiz);
-
-                    MessageBox.Show("Cidade excluida com exito", "Sucesso");
-
-                    cidades.PosicionarNaRaiz();
-
-                    pbMapa.Invalidate();
+                    return;
                 }
-                else
-                {
-                    MessageBox.Show("Falha ao excluir cidade", "Falha");
-                }
+                cidades.RemoverVertice(pos);
+                Cidade cid = cidades.CidadeNaPosicao(0);
+                txtNome.Text = cid.Nome;
+                txtCoordX.Text = cid.X.ToString();
+                txtCoordY.Text = cid.Y.ToString();
+
+                lsbCidades.Items.Clear();
+                lsbCidades.Items.Add("Nome            X     Y");
+                cidades.ExibirDados(lsbCidades);
+
+                MessageBox.Show("Cidade excluida com exito", "Sucesso");
+
+                pbMapa.Invalidate();
             }
             catch(Exception ex)
             {
@@ -323,7 +312,7 @@ namespace apProjetoArvore
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            cidades.GravarArquivoDeRegistros(dlgAbrir.FileName);
+            //cidades.GravarArquivoDeRegistros(dlgAbrir.FileName);
         }   
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -345,17 +334,6 @@ namespace apProjetoArvore
             }
         }
 
-        private void tabPage4_Enter(object sender, EventArgs e)
-        {
-            pbArvore.CreateGraphics().Clear(Color.Black);
-            pbArvore.Invalidate();
-        }
-
-        private void pbArvore_Paint(object sender, PaintEventArgs e)
-        {
-            cidades.DesenharArvore(pbArvore.Width / 2, 0, e.Graphics);
-        }
-
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -370,14 +348,16 @@ namespace apProjetoArvore
         {
             string origem = cbOrigem.SelectedItem.ToString();
             string destino = cbDestino.SelectedItem.ToString();
-            int distancia = (int)numDistancia.Value;
-            int tempo = (int)numTempo.Value;
+            //int distancia = (int)numDistancia.Value;
+            //int tempo = (int)numTempo.Value;
 
-            Ligacao novoCaminho = new Ligacao(origem, destino, distancia, tempo);
+            //Ligacao novoCaminho = new Ligacao(origem, destino, distancia, tempo);
 
-            if (cidades.Atual != null)
+            int posOrig = cidades.Existe(new Cidade(origem, 0, 0));
+            int posDest = cidades.Existe(new Cidade(destino, 0, 0));
+            if (posOrig > -1 && posDest > - 1)
             {
-                cidades.Atual.Caminhos.IncluirAposFim(novoCaminho);
+                cidades.NovaAresta(posOrig, posDest);
 
                 AtualizarDataGridViewCaminhos();
             }
@@ -386,9 +366,14 @@ namespace apProjetoArvore
         {
             dgvCaminhos.Rows.Clear();
 
-            foreach (Ligacao caminho in cidades.Atual.Caminhos)
+            int[,] caminhos = cidades.AdjMatrix;
+            for (int i = 0; i < cidades.NumVerts; i++)
             {
-                dgvCaminhos.Rows.Add(caminho.Origem, caminho.Destino, caminho.Distancia, caminho.Tempo);
+                for (int j = i + 1; j < cidades.NumVerts; j++)
+                {
+                    if (caminhos[i, j] == 1)
+                        dgvCaminhos.Rows.Add(cidades.CidadeNaPosicao(i).Nome, cidades.CidadeNaPosicao(j).Nome);
+                }
             }
         }
     }

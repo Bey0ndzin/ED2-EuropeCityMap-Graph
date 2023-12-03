@@ -39,8 +39,6 @@
             this.btnSair = new System.Windows.Forms.ToolStripButton();
             this.dlgAbrir = new System.Windows.Forms.OpenFileDialog();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.gbCidades = new System.Windows.Forms.GroupBox();
             this.btnCaminhos = new System.Windows.Forms.Button();
             this.lsbCidades = new System.Windows.Forms.ListBox();
@@ -52,34 +50,22 @@
             this.label2 = new System.Windows.Forms.Label();
             this.pbMapa = new System.Windows.Forms.PictureBox();
             this.gbCaminhos = new System.Windows.Forms.GroupBox();
+            this.dgvCaminhos = new System.Windows.Forms.DataGridView();
             this.btnCidades = new System.Windows.Forms.Button();
             this.btnHash = new System.Windows.Forms.Button();
             this.btnSubtrai = new System.Windows.Forms.Button();
             this.btnSoma = new System.Windows.Forms.Button();
-            this.numTempo = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
-            this.numDistancia = new System.Windows.Forms.NumericUpDown();
-            this.label8 = new System.Windows.Forms.Label();
             this.cbDestino = new System.Windows.Forms.ComboBox();
             this.cbOrigem = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.pbArvore = new System.Windows.Forms.PictureBox();
             this.dlgLigacao = new System.Windows.Forms.OpenFileDialog();
-            this.dgvCaminhos = new System.Windows.Forms.DataGridView();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.tabControl2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             this.gbCidades.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMapa)).BeginInit();
             this.gbCaminhos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numTempo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDistancia)).BeginInit();
-            this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbArvore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCaminhos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -188,37 +174,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.panel1.Controls.Add(this.tabControl2);
+            this.panel1.Controls.Add(this.gbCaminhos);
+            this.panel1.Controls.Add(this.gbCidades);
+            this.panel1.Controls.Add(this.pbMapa);
             this.panel1.Location = new System.Drawing.Point(0, 39);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(800, 456);
             this.panel1.TabIndex = 1;
-            // 
-            // tabControl2
-            // 
-            this.tabControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl2.Controls.Add(this.tabPage3);
-            this.tabControl2.Controls.Add(this.tabPage4);
-            this.tabControl2.Location = new System.Drawing.Point(0, 7);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(797, 446);
-            this.tabControl2.TabIndex = 27;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.tabPage3.Controls.Add(this.gbCidades);
-            this.tabPage3.Controls.Add(this.pbMapa);
-            this.tabPage3.Controls.Add(this.gbCaminhos);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(789, 420);
-            this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "Mapa";
             // 
             // gbCidades
             // 
@@ -230,9 +192,9 @@
             this.gbCidades.Controls.Add(this.label3);
             this.gbCidades.Controls.Add(this.txtNome);
             this.gbCidades.Controls.Add(this.label2);
-            this.gbCidades.Location = new System.Drawing.Point(293, 6);
+            this.gbCidades.Location = new System.Drawing.Point(12, 13);
             this.gbCidades.Name = "gbCidades";
-            this.gbCidades.Size = new System.Drawing.Size(281, 382);
+            this.gbCidades.Size = new System.Drawing.Size(281, 407);
             this.gbCidades.TabIndex = 0;
             this.gbCidades.TabStop = false;
             this.gbCidades.Text = "Cidades";
@@ -241,7 +203,7 @@
             // 
             this.btnCaminhos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCaminhos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCaminhos.Location = new System.Drawing.Point(75, 334);
+            this.btnCaminhos.Location = new System.Drawing.Point(73, 373);
             this.btnCaminhos.Name = "btnCaminhos";
             this.btnCaminhos.Size = new System.Drawing.Size(109, 28);
             this.btnCaminhos.TabIndex = 9;
@@ -319,7 +281,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pbMapa.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.pbMapa.Image = global::apProjetoArvore.Properties.Resources.mapaEspanhaPortugal;
-            this.pbMapa.Location = new System.Drawing.Point(310, 6);
+            this.pbMapa.Location = new System.Drawing.Point(315, 13);
             this.pbMapa.Name = "pbMapa";
             this.pbMapa.Size = new System.Drawing.Size(473, 414);
             this.pbMapa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -337,22 +299,27 @@
             this.gbCaminhos.Controls.Add(this.btnHash);
             this.gbCaminhos.Controls.Add(this.btnSubtrai);
             this.gbCaminhos.Controls.Add(this.btnSoma);
-            this.gbCaminhos.Controls.Add(this.numTempo);
-            this.gbCaminhos.Controls.Add(this.label9);
-            this.gbCaminhos.Controls.Add(this.numDistancia);
-            this.gbCaminhos.Controls.Add(this.label8);
             this.gbCaminhos.Controls.Add(this.cbDestino);
             this.gbCaminhos.Controls.Add(this.cbOrigem);
             this.gbCaminhos.Controls.Add(this.label7);
             this.gbCaminhos.Controls.Add(this.label6);
             this.gbCaminhos.Controls.Add(this.label5);
-            this.gbCaminhos.Location = new System.Drawing.Point(8, 6);
+            this.gbCaminhos.Location = new System.Drawing.Point(14, 12);
             this.gbCaminhos.Name = "gbCaminhos";
             this.gbCaminhos.Size = new System.Drawing.Size(279, 408);
             this.gbCaminhos.TabIndex = 3;
             this.gbCaminhos.TabStop = false;
             this.gbCaminhos.Text = "Caminhos";
             this.gbCaminhos.Visible = false;
+            // 
+            // dgvCaminhos
+            // 
+            this.dgvCaminhos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCaminhos.Location = new System.Drawing.Point(0, 243);
+            this.dgvCaminhos.Name = "dgvCaminhos";
+            this.dgvCaminhos.Size = new System.Drawing.Size(279, 125);
+            this.dgvCaminhos.TabIndex = 26;
+            this.dgvCaminhos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // btnCidades
             // 
@@ -399,40 +366,6 @@
             this.btnSoma.Text = "+";
             this.btnSoma.UseVisualStyleBackColor = true;
             this.btnSoma.Click += new System.EventHandler(this.btnSoma_Click);
-            // 
-            // numTempo
-            // 
-            this.numTempo.Location = new System.Drawing.Point(84, 165);
-            this.numTempo.Name = "numTempo";
-            this.numTempo.Size = new System.Drawing.Size(85, 20);
-            this.numTempo.TabIndex = 20;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(17, 165);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(49, 15);
-            this.label9.TabIndex = 18;
-            this.label9.Text = "Tempo:";
-            // 
-            // numDistancia
-            // 
-            this.numDistancia.Location = new System.Drawing.Point(84, 127);
-            this.numDistancia.Name = "numDistancia";
-            this.numDistancia.Size = new System.Drawing.Size(85, 20);
-            this.numDistancia.TabIndex = 17;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(17, 129);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(61, 15);
-            this.label8.TabIndex = 16;
-            this.label8.Text = "Distância:";
             // 
             // cbDestino
             // 
@@ -481,43 +414,9 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Ligações";
             // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.pbArvore);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(789, 420);
-            this.tabPage4.TabIndex = 1;
-            this.tabPage4.Text = "Árvore";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            this.tabPage4.Enter += new System.EventHandler(this.tabPage4_Enter);
-            // 
-            // pbArvore
-            // 
-            this.pbArvore.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbArvore.BackColor = System.Drawing.Color.Black;
-            this.pbArvore.Location = new System.Drawing.Point(0, 0);
-            this.pbArvore.Name = "pbArvore";
-            this.pbArvore.Size = new System.Drawing.Size(793, 420);
-            this.pbArvore.TabIndex = 0;
-            this.pbArvore.TabStop = false;
-            this.pbArvore.Paint += new System.Windows.Forms.PaintEventHandler(this.pbArvore_Paint);
-            // 
             // dlgLigacao
             // 
             this.dlgLigacao.FileName = "GrafoTremEspanhaPortugal";
-            // 
-            // dgvCaminhos
-            // 
-            this.dgvCaminhos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCaminhos.Location = new System.Drawing.Point(0, 243);
-            this.dgvCaminhos.Name = "dgvCaminhos";
-            this.dgvCaminhos.Size = new System.Drawing.Size(279, 125);
-            this.dgvCaminhos.TabIndex = 26;
-            this.dgvCaminhos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // Form1
             // 
@@ -535,17 +434,11 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.tabControl2.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
             this.gbCidades.ResumeLayout(false);
             this.gbCidades.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMapa)).EndInit();
             this.gbCaminhos.ResumeLayout(false);
             this.gbCaminhos.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numTempo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDistancia)).EndInit();
-            this.tabPage4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbArvore)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCaminhos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -554,15 +447,6 @@
 
         #endregion
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.GroupBox gbCidades;
-        private System.Windows.Forms.Button btnCaminhos;
-        private System.Windows.Forms.ListBox lsbCidades;
-        private System.Windows.Forms.TextBox txtCoordY;
-        private System.Windows.Forms.TextBox txtCoordX;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtNome;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnProcurar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -572,28 +456,29 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton btnExcluir;
         private System.Windows.Forms.ToolStripButton btnSair;
+        private System.Windows.Forms.OpenFileDialog dlgAbrir;
+        private System.Windows.Forms.OpenFileDialog dlgLigacao;
+        private System.Windows.Forms.GroupBox gbCidades;
+        private System.Windows.Forms.Button btnCaminhos;
+        private System.Windows.Forms.ListBox lsbCidades;
+        private System.Windows.Forms.TextBox txtCoordY;
+        private System.Windows.Forms.TextBox txtCoordX;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtNome;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PictureBox pbMapa;
         private System.Windows.Forms.GroupBox gbCaminhos;
+        private System.Windows.Forms.DataGridView dgvCaminhos;
+        private System.Windows.Forms.Button btnCidades;
         private System.Windows.Forms.Button btnHash;
         private System.Windows.Forms.Button btnSubtrai;
         private System.Windows.Forms.Button btnSoma;
-        private System.Windows.Forms.NumericUpDown numTempo;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.NumericUpDown numDistancia;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cbDestino;
         private System.Windows.Forms.ComboBox cbOrigem;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnCidades;
-        private System.Windows.Forms.OpenFileDialog dlgAbrir;
-        private System.Windows.Forms.PictureBox pbMapa;
-        private System.Windows.Forms.TabControl tabControl2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.PictureBox pbArvore;
-        private System.Windows.Forms.OpenFileDialog dlgLigacao;
-        private System.Windows.Forms.DataGridView dgvCaminhos;
     }
 }
 

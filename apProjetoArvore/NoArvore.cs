@@ -11,17 +11,14 @@ namespace apProjetoArvore
         Dado info;
         NoArvore<Dado> esquerda;
         NoArvore<Dado> direita;
-        ListaDupla<Ligacao> caminhos;
 
         public NoArvore(Dado novo)
         {
             info = novo;
-            caminhos = new ListaDupla<Ligacao>();
         }
         public Dado Info { get { return info; } set { info = value; } }
         public NoArvore<Dado> Esq { get { return esquerda; } set { esquerda = value; } }
         public NoArvore<Dado> Dir { get { return direita; } set { direita = value; } }
-        public ListaDupla<Ligacao> Caminhos { get { return caminhos; } }
 
         public int CompareTo(NoArvore<Dado> other)
         {
